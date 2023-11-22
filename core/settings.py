@@ -144,7 +144,6 @@ MEDIA_URL = '/media/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static'),
-    os.path.join(BASE_DIR, 'apps/static/media'),
 )
 
 
