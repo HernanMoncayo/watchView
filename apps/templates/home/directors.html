@@ -6,22 +6,21 @@
 
 {% block content %}
 
-
-
   <div class="content">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="title">Catalogo de Películas</h3>
+            <h3 class="title">Directores</h3>
           </div>
           <div class="card-body all-icons">
             <div class="row">
-              {% for movie in movies %}
+              {% for director in directors %}
                 <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
                   <div class="font-icon-detail">
-                    <img class="mb-2" src="{{ movie.cover.url }}" style="width:170px;height:200px;"/>
-                    <h4>{{ movie.title }}</h4>
+                    <h4>{{ director.name }}</h4>
+                    <p>{{ director.age }} Años</p>
+                    <p>Nacionalidad {{ director.nationality }}</p>
                   </div>
                 </div>
               {% endfor %}

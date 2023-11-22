@@ -6,39 +6,46 @@ from django.template import loader
 from django.urls import reverse
 from .models import Plataform, Director, Movie
 
-class MovieListView(ListView):
-    model = Movie
-
 @login_required(login_url="/login/")
 def index(request):
-    context = {'segment': 'index'}
-
-    html_template = loader.get_template('home/index.html')
-    return HttpResponse(html_template.render(context, request))
-
+  context = {'segment': 'index'}
+  html_template = loader.get_template('home/index.html')
+  return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
 def pages(request):
-    context = {}
-    # All resource paths end in .html.
-    # Pick out the html file name from the url. And load that template.
-    try:
+  context = {}
 
-        load_template = request.path.split('/')[-1]
+  try:
+    load_template = request.path.split('/')[-1]
 
-        if load_template == 'admin':
-            return HttpResponseRedirect(reverse('admin:index'))
-        context['segment'] = load_template
+    if load_template == 'admin':
+        return HttpResponseRedirect(reverse('admin:index'))
 
-        html_template = loader.get_template('home/' + load_template)
-        return HttpResponse(html_template.render(context, request))
+    context['segment'] = load_template
 
-    except template.TemplateDoesNotExist:
 
-        html_template = loader.get_template('home/page-404.html')
-        return HttpResponse(html_template.render(context, request))
+    if load_template == 'movies':
+      movies = Movie.objects.all()
+      context['movies'] = movies
 
-    except:
-        html_template = loader.get_template('home/page-500.html')
-        return HttpResponse(html_template.render(context, request))
+    elif load_template == 'directors':
+      directors = Director.objects.all()
+      context['directors'] = directors
+
+    elif load_template == 'plataforms':
+      plataforms = Plataform.objects.all()
+      context['plataforms'] = plataforms
+
+    html_template = loader.get_template('home/' + load_template + '.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+  except template.TemplateDoesNotExist:
+    html_template = loader.get_template('home/page-404.html')
+    return HttpResponse(html_template.render(context, request))
+
+  except:
+    html_template = loader.get_template('home/page-500.html')
+    return HttpResponse(html_template.render(context, request))
 

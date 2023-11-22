@@ -13,7 +13,7 @@ class Plataform (models.Model):
   price = models.IntegerField()
   
   def __str__(self):
-      return self.name
+    return self.name
 
 class Director (models.Model): 
   name = models.CharField(max_length=50)
@@ -35,5 +35,5 @@ class Movie (models.Model):
   plataform = models.ForeignKey('Plataform', on_delete=models.PROTECT,related_name='get_plataformas' )
   
   def __str__(self):
-      return self.title
+    return self.title
 

@@ -15,5 +15,4 @@ urlpatterns = [
 
     # Leave `Home.Urls` as last the last line
     path("", include("apps.home.urls")),
-    path('movies/', views.MovieListView.as_view(), name='movie-list'),
 ]
