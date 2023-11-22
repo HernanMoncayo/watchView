@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Icons {% endblock %} 
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+{{ object_list }}
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="title">Catalogo de Películas</h3>
+          </div>
+          <div class="card-body all-icons">
+            <div class="row">
+              <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+                <div class="font-icon-detail">
+                  <div>
+                    {% for movie in object_list.all %}
+                      <h2>
+                          <a href="{% url 'movies:title' movie.title %}">{{ movie.title }}</a>
+                      </h2>
+                    {% endfor %}
+                  </div>
+                  <div>
+                    {{ movies }}
+                  </div>
+                  <i class="tim-icons icon-align-center"></i>
+                  <p>icon-aliaasdfajksndahkdn</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}
+
