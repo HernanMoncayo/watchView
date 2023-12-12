@@ -24,7 +24,6 @@ def pages(request):
 
     context['segment'] = load_template
 
-
     if load_template == 'movies':
       movies = Movie.objects.all()
       context['movies'] = movies
@@ -36,6 +35,10 @@ def pages(request):
     elif load_template == 'plataforms':
       plataforms = Plataform.objects.all()
       context['plataforms'] = plataforms
+    
+    elif load_template == 'movies-details':
+      movie = Movie.objects.get(pk=request.GET.get('id'))
+      context['movie'] = movie
 
     html_template = loader.get_template('home/' + load_template + '.html')
     return HttpResponse(html_template.render(context, request))

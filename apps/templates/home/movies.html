@@ -16,13 +16,17 @@
           <div class="card-body all-icons">
             <div class="row">
               {% for movie in movies %} 
-
-              <img src="{{ movie.cover.url }}"/>
-
                 <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
                   <div class="font-icon-detail">
-                    <img class="mb-2" src="{{ movie.cover.url }}" style="width:170px;height:200px;"/>
-                    <h4>{{ movie.title }}</h4>
+                    <img class="mb-2" src="{{ ASSETS_ROOT }}{{ movie.cover.url }}" style="width:170px;height:250px;"/>
+                    <h4 class="text-primary">{{ movie.title }}</h4>
+                  </div>
+                  <div>
+                    <a href="{% url 'pages' %}movies-details?id={{ movie.pk }}" class="btn btn-primary btn-block">Ver más</a>
+                    <!-- <a href="movies-details" class="btn btn-primary btn-block">Calificar</a> -->
+                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#ratingModal">
+                      Calificar
+                    </button>
                   </div>
                 </div>
               {% endfor %}
@@ -32,6 +36,88 @@
       </div>
     </div>
   </div>
+
+  <!-- Diálogo emergente -->
+<div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-primary" id="ratingModalLabel">Calificar película</h4>
+      </div>
+
+      <div class="modal-body">
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 1" tabindex="0">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 2" tabindex="1">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 3" tabindex="2">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 4" tabindex="3">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 5" tabindex="4">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 6" tabindex="5">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 7" tabindex="6">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 8" tabindex="7">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button mr-3 but" role="button" aria-label="Rate 9" tabindex="8">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+        <button class="ipc-starbar__rating__button but" role="button" aria-label="Rate 10" tabindex="9">
+          <i class="tim-icons icon-shape-star"></i>
+        </button>
+      </div>
+        
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar calificación</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-content{
+    width: 33rem;
+    height: 13rem;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  .modal-body {
+    display: flex;
+    justify-content: center;
+  }
+  .but {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+  .but:hover {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fbc658;
+  }
+  .but:focus {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fbc658;
+  }
+  .tim-icons{
+    font: normal normal normal 1.2rem 'Nucleo';
+  }
+</style>
 
 {% endblock content %}
 

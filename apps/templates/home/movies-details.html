@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Icons {% endblock %} 
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="title">{{ movie.title }}</h3>
+          </div>
+          <div class="card-body all-icons">
+            <div class="row">
+              <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6">
+                <div class="font-icon-detail">
+                  <img class="mb-2" src="{{ ASSETS_ROOT }}{{ movie.cover.url }}" style="width:170px;height:250px;"/>
+                </div>
+              </div>
+              <div class="font-icon-list col-6">
+                <div class="mt-4">
+                  <h4 class="text-primary">Descripcion</h4>
+                  <p>{{ movie.description }}</p>
+                </div>
+                <div class="mt-4">
+                  <h4 class="text-primary">Director</h4>
+                  <p>{{ movie.director }}</p>
+                </div>
+                <div class="mt-4">
+                  <h4 class="text-primary">Ranking</h4>
+                  <p><i class="tim-icons icon-shape-star mr-1 mb-1" style="color: white"></i>{{ movie.ranking }}</p>
+                </div>
+                <div class="mt-4">
+                  <h4 class="text-primary">Plataforma</h4>
+                  <p>{{ movie.plataform }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block javascripts %}{% endblock javascripts %}
+
