@@ -5,6 +5,7 @@ from django.views.generic import CreateView, DeleteView, UpdateView, ListView, D
 from django.template import loader
 from django.urls import reverse
 from .models import Plataform, Director, Movie
+from .imdb_api import get_movie_data
 
 @login_required(login_url="/login/")
 def index(request):
@@ -27,6 +28,9 @@ def pages(request):
     if load_template == 'movies':
       movies = Movie.objects.all()
       context['movies'] = movies
+
+      movie_data = get_movie_data("game")
+      context['movie_data'] = movie_data
 
     elif load_template == 'directors':
       directors = Director.objects.all()
