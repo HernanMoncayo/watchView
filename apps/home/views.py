@@ -6,6 +6,10 @@ from django.template import loader
 from django.urls import reverse
 from .models import Plataform, Director, Movie
 
+# Api
+from rest_framework import viewsets 
+from .serializers import DirectorSerializer, MovieSerializer, PlataformSerializer
+
 @login_required(login_url="/login/")
 def index(request):
   context = {'segment': 'index'}
@@ -13,7 +17,7 @@ def index(request):
   return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
-def pages(request):
+def pages(request, route = None):
   context = {}
 
   try:
@@ -51,4 +55,16 @@ def pages(request):
   except:
     html_template = loader.get_template('home/page-500.html')
     return HttpResponse(html_template.render(context, request))
+
+class DirectorViewSet(viewsets.ModelViewSet):
+    queryset = Director.objects.all()
+    serializer_class = DirectorSerializer
+
+class MovieViewSet(viewsets.ModelViewSet):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+
+class PlataformViewSet(viewsets.ModelViewSet):
+    queryset = Plataform.objects.all()
+    serializer_class = PlataformSerializer
 
