@@ -95,8 +95,12 @@ if os.environ.get('DB_ENGINE') and os.environ.get('DB_ENGINE') == "mysql":
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'db.sqlite3',
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME', 'mydatabase'),
+            'USER': os.getenv('DB_USERNAME', 'myuser'),
+            'PASSWORD': os.getenv('DB_PASS', '123'),
+            'HOST': os.getenv('DB_HOST', 'postgres'),  # Nombre del servicio de la base de datos en Docker Compose
+            'PORT': os.getenv('DB_PORT', 5432),
         }
     }
 

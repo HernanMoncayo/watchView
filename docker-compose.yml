@@ -8,6 +8,9 @@ services:
     networks:
       - db_network
       - web_network
+    depends_on:
+    - db
+
   nginx:
     container_name: nginx
     restart: always
@@ -20,9 +23,25 @@ services:
       - web_network
     depends_on: 
       - appseed-app
+
+  db:
+    image: postgres:13
+    container_name: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+        POSTGRES_DB: ${DB_NAME}
+        POSTGRES_USER: ${DB_USERNAME}
+        POSTGRES_PASSWORD: ${DB_PASS}
+        POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - db_network
+
 networks:
   db_network:
     driver: bridge
   web_network:
     driver: bridge
- 
+
+volumes:
+  postgres_data:

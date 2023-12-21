@@ -1,4 +1,5 @@
 # De esta forma funcionan las vistas jajaja
+
 #  from django.urls import path, re_path, include
 # from apps.home import views
 # from rest_framework import routers # Api
@@ -21,17 +22,18 @@ from rest_framework import routers
 from apps.home import views
 from .views import index, pages, DirectorViewSet, MovieViewSet, PlataformViewSet
 
+# n--
 router = routers.DefaultRouter()
 router.register(r'director-rest', DirectorViewSet)
 router.register(r'movie-rest', MovieViewSet)
 router.register(r'plataform-rest', PlataformViewSet)
 
 urlpatterns = [
-    path('', index, name='home'),
-    path('api/', include(router.urls)),  # Agregamos las URLs de la API
+    path('', views.index, name='home'),
+    path('api/', include(router.urls)),  # Agregamos las URLs de la API--
 
     # La siguiente línea manejará todas las rutas no coincidentes con las anteriores.
-    # Asegúrate de que esta línea esté al final.
+    # Asegúrate de que esta línea esté al final.--
     path('<path:route>/', pages, name='pages'),
-    # re_path(r'^.*\.*', views.pages, name='pages'),
+    re_path(r'^.*\.*', views.pages, name='pages'),
 ]
